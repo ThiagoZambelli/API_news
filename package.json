@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index",
-    "dev":"nodemon index"
+    "dev": "nodemon index"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
   "homepage": "https://github.com/ThiagoZambelli/API_news#readme",
   "dependencies": {
     "express": "^5.2.1",
+    "mongoose": "^9.6.1",
     "nodemon": "^3.1.14"
   }
 }

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+//cria conexão com a DB
 const connetcDatabase = () => {
     console.log("wait connecting to the database");
 

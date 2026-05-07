@@ -1,3 +1,4 @@
+//Model que controla o modelo que vai conectar com o DB
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({

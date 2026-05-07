@@ -1,3 +1,4 @@
+//rotas para acessar a API
 const route = require('express').Router();
 const userController = require('../controllers/user.controller')
 const { validId, validUser} = require("../middlewares/global.middlewares");

@@ -1,6 +1,8 @@
+//Middlewares globais, que vao atuar entre as rotas e oa controllers
 const mongoose = require("mongoose");
 const userService = require("../services/user.service");
 
+//realiza a validação do ID que chega via parametro
 const validId = (req, res, next) => {
     const id = req.params.id;
 
@@ -8,10 +10,12 @@ const validId = (req, res, next) => {
         return res.status(400).send({ message: "Invalid ID!" });
     };
 
+    //retorna o id validado pro next na req
     req.id = id;
     next();
 };
 
+//realiza a validação do usuario pelo ID
 const validUser = async (req, res, next) => {
     const id = req.params.id;
     const user = await userService.findByIdService(id);
@@ -20,6 +24,7 @@ const validUser = async (req, res, next) => {
         return res.status(400).send({ message: "User not found" });
     };
 
+    //retorna o id e o usuario validado pelo next na req
     req.id = id;
     req.user = user;
     next();

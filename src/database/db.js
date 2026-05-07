@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 //cria conexão com a DB
 const connetcDatabase = () => {
@@ -8,4 +8,4 @@ const connetcDatabase = () => {
     ).then(() => console.log("MongoDB Atlas Connected")).catch((error) => console.log(error))
 };
 
-module.exports = connetcDatabase;
+export default connetcDatabase;

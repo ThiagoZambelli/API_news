@@ -1,6 +1,7 @@
 {
   "name": "api_news",
   "version": "1.0.0",
+  "type": "module",
   "description": "Retorno do projeto (API news0",
   "main": "index.js",
   "scripts": {
@@ -14,7 +15,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/ThiagoZambelli/API_news/issues"
   },

@@ -1,5 +1,5 @@
 //execução da lógica das rotas
-const userService = require('../services/user.service');
+import userService from '../services/user.service.js';
 
 //controller da rota de criação de usuarios
 const create = async (req, res) => {
@@ -96,4 +96,4 @@ const updateById = async (req, res) => {
     }
 };
 
-module.exports = { create, findAll, findById, updateById };
+export default { create, findAll, findById, updateById };

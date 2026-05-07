@@ -1,9 +1,9 @@
 //Middlewares globais, que vao atuar entre as rotas e oa controllers
-const mongoose = require("mongoose");
-const userService = require("../services/user.service");
+import mongoose from "mongoose";
+import  userService from "../services/user.service.js";
 
 //realiza a validação do ID que chega via parametro
-const validId = (req, res, next) => {
+export const validId = (req, res, next) => {
     try {
         const id = req.params.id;
 
@@ -20,7 +20,7 @@ const validId = (req, res, next) => {
 };
 
 //realiza a validação do usuario pelo ID
-const validUser = async (req, res, next) => {
+export const validUser = async (req, res, next) => {
     try {
         const id = req.params.id;
         const user = await userService.findByIdService(id);
@@ -38,5 +38,5 @@ const validUser = async (req, res, next) => {
     }
 };
 
-module.exports = { validId, validUser };
+
 

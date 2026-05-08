@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/ThiagoZambelli/API_news#readme",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "express": "^5.2.1",
     "mongoose": "^9.6.1",
     "nodemon": "^3.1.14"

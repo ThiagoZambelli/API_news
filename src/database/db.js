@@ -4,7 +4,8 @@ import mongoose from "mongoose";
 const connetcDatabase = () => {
     console.log("wait connecting to the database");
 
-    mongoose.connect("mongodb+srv://API_news:admin@cluster0.pyhi6mx.mongodb.net/?appName=Cluster0"
+    mongoose.connect(
+      process.env.MONGODB_URI
     ).then(() => console.log("MongoDB Atlas Connected")).catch((error) => console.log(error))
 };
 

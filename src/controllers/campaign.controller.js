@@ -1,38 +1,37 @@
-import { createService, findAllService, findByIdService } from '../services/chapter.service.js';
+import { createService, findAllService, findByIdService } from '../services/campaign.service.js';
 
 const create = async (req, res) => {
     try {
-        const { title, text, section } = req.body;
+        const { title, description } = req.body;
 
         if (!req.body) {
             res.status(400).send({ message: "submit all fields for Create" })
         };
 
-        if (!title || !text || !campaign || !section) {
+        if (!title || !description) {
             res.status(400).send({ message: "submit all fields for Create" })
         };
 
         await createService({
             title,
-            text,
-            section,
+            description,
             author: "fake id"
         });
 
-        res.status(201).send({ message: "Chapter created!" });
+        res.status(201).send({ message: "Campaign created!" });
 
     } catch (err) { res.status(500).send({ message: err.message }) };
 };
 
 const findAll = async (req, res) => {
     try {
-        const chapters = await findAllService();
+        const campaign = await findAllService();
 
-        if (chapters.length === 0) {
-            return res.status(400).send({ message: " There are no registered Chapters" })
+        if (campaign.length === 0) {
+            return res.status(400).send({ message: " There are no registered Campaign" })
         };
 
-        res.send(chapters);
+        res.send(campaign);
 
     } catch (err) { res.status(500).send({ message: err.message }) };
 };

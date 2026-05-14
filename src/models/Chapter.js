@@ -21,7 +21,18 @@ const Chapter = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         require: true
-    }
+    },
+    section: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Section",
+        require: true
+    },
+    campaign: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Campaign",
+        require: true
+    },
+
 });
 
 const Chapter = mongoose.model("Chapter", ChapterSchema);

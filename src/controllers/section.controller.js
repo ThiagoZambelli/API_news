@@ -8,14 +8,14 @@ const create = async (req, res) => {
             res.status(400).send({ message: "submit all fields for Create" })
         };
 
-        if (!title || !campaign) {
+        if (!title) {
             res.status(400).send({ message: "submit all fields for Create" })
         };
 
         await createService({
             title,
-            campaign,
-            author: "fake id"
+            author: "69f3a1c7cef2f5bdb8c89677",
+            campaign: "6a06174eeec49d8bcbd0d4da"
         });
 
         res.status(201).send({ message: "Section created!" });

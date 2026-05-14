@@ -15,7 +15,7 @@ const create = async (req, res) => {
         await createService({
             title,
             description,
-            author: "fake id"
+            author: "69f3a1c7cef2f5bdb8c89677"
         });
 
         res.status(201).send({ message: "Campaign created!" });

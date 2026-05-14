@@ -1,12 +1,7 @@
 import mongoose from 'mongoose';
 
-const ChapterSchema = new mongoose.Schema({
+const SectionSchema = new mongoose.Schema({
     title: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    text: {
         type: String,
         required: true,
         trim: true
@@ -20,18 +15,22 @@ const ChapterSchema = new mongoose.Schema({
         ref: "User",
         required: true
     },
-    section: {
+    chapters: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Chapter"
+        }
+    ],
+    campaign: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Section",
+        ref: "Campaign",
         required: true
-    },
-
+    }
 },
     {
         timestamps: true
-    }
-);
+    });
 
-const Chapter = mongoose.model("Chapter", ChapterSchema);
+const Section = mongoose.model("Section", SectionSchema);
 
-export default Chapter;
+export default Section;

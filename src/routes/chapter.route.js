@@ -1,10 +1,10 @@
 import { Router } from "express";
-import {create, findAll, findById} from "../controllers/chapter.controller.js"
+import chapterController from "../controllers/chapter.controller.js"
 
 const route = Router();
 
-route.post("/", create)
-route.get("/", findAll)
-route.get("/:chapterId", finById)
+route.post("/", chapterController.create)
+route.get("/", chapterController.findAll)
+route.get("/:chapterId", chapterController.findById)
 
 export default route;

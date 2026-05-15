@@ -1,6 +1,8 @@
 import { createService, findAllService, findByIdService } from '../services/chapter.service.js';
 
 const create = async (req, res) => {
+
+    console.log("aqui!!!!!!!!!!!!!!")
     try {
         const { title, text, section } = req.body;
 
@@ -8,7 +10,7 @@ const create = async (req, res) => {
             res.status(400).send({ message: "submit all fields for Create" })
         };
 
-        if (!title || !text || !campaign || !section) {
+        if (!title || !text || !section) {
             res.status(400).send({ message: "submit all fields for Create" })
         };
 
@@ -16,7 +18,7 @@ const create = async (req, res) => {
             title,
             text,
             section,
-            author: "fake id"
+            author: req.userId
         });
 
         res.status(201).send({ message: "Chapter created!" });

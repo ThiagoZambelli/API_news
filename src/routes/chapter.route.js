@@ -1,9 +1,10 @@
 import { Router } from "express";
-import chapterController from "../controllers/chapter.controller.js"
+import chapterController from "../controllers/chapter.controller.js";
+import { authMiddleware } from "../middlewares/auth.middleware.js";
 
 const route = Router();
 
-route.post("/", chapterController.create)
+route.post("/", authMiddleware, chapterController.create)
 route.get("/", chapterController.findAll)
 route.get("/:chapterId", chapterController.findById)
 

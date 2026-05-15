@@ -2,8 +2,16 @@ import bcrypt from 'bcrypt';
 import { generateToken, loginService } from '../services/auth.service.js'
 
 const login = async (req, res) => {
-    const { userName, password } = req.body;
+    const {body} = req;
+    if (!body) {
+        res.status(400).send({ message: "submit all fields for Login" })
+    }
     try {
+        const { userName, password } = req.body;
+        if (!userName || !password) {            
+            res.status(400).send({ message: "submit all fields for Login" })
+        };
+
         const user = await loginService(userName);
 
         if (!user) {
@@ -18,8 +26,8 @@ const login = async (req, res) => {
 
         //res.send({message: "login OK"});
         const token = generateToken(user.id);
-        res.send({token});
-    } catch (err) { res.satus(500).send({ message: err.message }) }
+        res.send({ token });
+    } catch (err) { res.status(500).send({ message: err.message }) }
 }
 
 

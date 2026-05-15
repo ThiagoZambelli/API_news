@@ -3,6 +3,7 @@ import userService from '../services/user.service.js';
 
 //controller da rota de criação de usuarios
 const create = async (req, res) => {
+    console.log("aqui!!!!!!!!!")
     try {
         const { name, userName, password, email } = req.body;
         //verifica se não esta faldo nenhum dos campos enviados no body

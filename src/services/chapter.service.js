@@ -1,7 +1,8 @@
 import Chapter from "../models/Chapter.js";
 
 const createService = (body) => Chapter.create(body);
-const findAllService = () => Chapter.find();
+const findAllService = (offset, limit) => Chapter.find().sort({ _id: -1 }).skip(offset).limit(limit).populate("author").populate("section");
 const findByIdService = (chapterId) => Chapter.findById(chapterId);
+const countNews = () => Chapter.countDocuments();
 
-export { createService, findAllService, findByIdService };
+export { createService, findAllService, findByIdService, countNews };

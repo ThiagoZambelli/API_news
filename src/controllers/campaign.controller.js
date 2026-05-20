@@ -1,15 +1,15 @@
-import { createService, findAllService, findByIdService } from '../services/campaign.service.js';
+import { countCampaign, createService, findAllService, findByIdService } from '../services/campaign.service.js';
 
 const create = async (req, res) => {
     try {
         const { title, description } = req.body;
 
         if (!req.body) {
-            res.status(400).send({ message: "submit all fields for Create" })
+            return res.status(400).send({ message: "submit all fields for Create" })
         };
 
         if (!title || !description) {
-            res.status(400).send({ message: "submit all fields for Create" })
+            return res.status(400).send({ message: "submit all fields for Create" })
         };
 
         await createService({
@@ -20,26 +20,63 @@ const create = async (req, res) => {
 
         res.status(201).send({ message: "Campaign created!" });
 
-    } catch (err) { res.status(500).send({ message: err.message }) };
+    } catch (err) { return res.status(500).send({ message: err.message }) };
 };
 
 const findAll = async (req, res) => {
     try {
-        const campaign = await findAllService();
+        let { limit, offset } = req.query;
+        limit = Number(limit);
+        offset = Number(offset);
+
+
+        if (!limit) {
+            limit = 5;
+        };
+        if (!offset) {
+            offset = 0;
+        };
+
+
+        const campaign = await findAllService(offset, limit);
+
+        const total = await countCampaign();
+        const currentUrl = req.baseUrl;
+
+        const next = offset + limit;
+        const nextUrl = next < total ? `${currentUrl}?limit=${limit}&offset=${next}` : null;
+
+        const previus = offset - limit < 0 ? null : offset - limit;
+        const previusUrl = previus != null ? `${currentUrl}?limit=${limit}&offset=${previus}` : null;
+
 
         if (campaign.length === 0) {
             return res.status(400).send({ message: " There are no registered Campaign" })
         };
 
-        res.send(campaign);
+        res.send({
+            nextUrl,
+            previusUrl,
+            limit,
+            offset,
+            total,
 
-    } catch (err) { res.status(500).send({ message: err.message }) };
+            results: campaign.map((item) => ({
+                id: item._id,
+                title: item.title,
+                description: item.description,
+                author: item.author,
+                sections: item.sections
+            })),
+        });
+
+    } catch (err) { return res.status(500).send({ message: err.message }) };
 };
 
 const findById = async (req, res) => {
     try {
 
-    } catch (err) { res.status(500).send({ message: err.message }) };
+    } catch (err) { return res.status(500).send({ message: err.message }) };
 };
 
 export default { create, findAll, findById }; 

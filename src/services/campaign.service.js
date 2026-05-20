@@ -1,7 +1,7 @@
 import Campaign from "../models/Campaign.js";
 
 const createService = (body) => Campaign.create(body);
-const findAllService = () => Campaign.find();
+const findAllService = (offset, limit) => Campaign.find().sort({ _id: -1 }).skip(offset).limit(limit).populate("author").populate("sections");
 const findByIdService = (campaignId) => Campaign.findById(campaignId);
 const updateService = (id,
     title,
@@ -9,5 +9,6 @@ const updateService = (id,
     sections) => Campaign.findOneAndUpdate(
         { _id: id },
         { title, description, sections });
+const countCampaign = () => Campaign.countDocuments();
 
-export { createService, findAllService, findByIdService, updateService };
+export { createService, findAllService, findByIdService, updateService, countCampaign };

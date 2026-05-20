@@ -1,4 +1,5 @@
-import { countNews, createService, findAllService, findByIdService } from '../services/chapter.service.js';
+import { countChapter, createService, findAllService, findByIdService } from '../services/chapter.service.js';
+import Section from "../models/Section.js";
 
 const create = async (req, res) => {
 
@@ -13,16 +14,28 @@ const create = async (req, res) => {
             res.status(400).send({ message: "submit all fields for Create" })
         };
 
-        await createService({
+        const chapter = await createService({
             title,
             text,
             section,
             author: req.userId
         });
 
+        await Section.findByIdAndUpdate(
+            section,
+            {
+                $push: {
+                    chapters: chapter._id,
+                },
+            },
+            {
+                returnDocument: "after",
+            }
+        );
+
         res.status(201).send({ message: "Chapter created!" });
 
-    } catch (err) { res.status(500).send({ message: err.message }) };
+    } catch (err) { return res.status(500).send({ message: err.message }) };
 };
 
 const findAll = async (req, res) => {
@@ -40,7 +53,8 @@ const findAll = async (req, res) => {
         };
 
         const chapters = await findAllService(offset, limit);
-        const total = await countNews();
+
+        const total = await countChapter();
         const currentUrl = req.baseUrl;
 
         const next = offset + limit;
@@ -62,19 +76,20 @@ const findAll = async (req, res) => {
 
             results: chapters.map((item) => ({
                 id: item._id,
+                title: item.title,
                 text: item.text,
                 author: item.author,
                 section: item.section,
             })),
         });
 
-    } catch (err) { res.status(500).send({ message: err.message }) };
+    } catch (err) { return res.status(500).send({ message: err.message }) };
 };
 
 const findById = async (req, res) => {
     try {
 
-    } catch (err) { res.status(500).send({ message: err.message }) };
+    } catch (err) { return res.status(500).send({ message: err.message }) };
 };
 
 export default { create, findAll, findById }; 

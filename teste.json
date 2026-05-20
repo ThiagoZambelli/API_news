@@ -1,0 +1,36 @@
+{
+    "nextUrl": null,
+    "previusUrl": "/chapter?limit=5&offset=0",
+    "limit": 5,
+    "offset": 5,
+    "total": 6,
+    "results": [
+        {
+            "id": "6a0dbb292329529e02cb2c63",
+            "title": "pipocassss",
+            "text": "Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker.",
+            "author": {
+                "_id": "69fde7b16c75ea11b7f555fe",
+                "name": "teste3",
+                "userName": "@teste3",
+                "email": "teste3@teste3",
+                "__v": 0
+            },
+            "section": {
+                "_id": "6a0db9bb9a2ac1d206ee509e",
+                "title": "testando",
+                "author": "69fde7b16c75ea11b7f555fe",
+                "chapters": [
+                    "6a0dbb292329529e02cb2c63",
+                    "6a0dbb312329529e02cb2c64",
+                    "6a0dbb352329529e02cb2c65",
+                    "6a0dbb3b2329529e02cb2c66"
+                ],
+                "campaign": "6a0db7745bfbc7992b753960",
+                "createdAt": "2026-05-20T13:40:11.628Z",
+                "updatedAt": "2026-05-20T13:46:35.174Z",
+                "__v": 0
+            }
+        }
+    ]
+}

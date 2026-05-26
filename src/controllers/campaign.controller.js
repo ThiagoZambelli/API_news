@@ -74,7 +74,23 @@ const findAll = async (req, res) => {
 };
 
 const findById = async (req, res) => {
-    try {
+     try {
+        const { campaignId } = req.params;
+
+        const campaign = await findByIdService(campaignId);
+        if (!campaign) {
+            return res.status(400).send({ message: "This campaign does not exist." })
+        }
+
+        return res.send({
+            Campaign: {
+                id: campaign._id,
+                title: campaign.title,
+                description: campaign.description,
+                author: campaign.author,
+                sections: campaign.sections
+            }
+        })
 
     } catch (err) { return res.status(500).send({ message: err.message }) };
 };

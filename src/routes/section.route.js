@@ -6,6 +6,6 @@ const route = Router();
 
 route.post("/", authMiddleware, sectionController.create)
 route.get("/", sectionController.findAll)
-route.get("/:chapterId", sectionController.findById)
+route.get("/:sectionId", sectionController.findById)
 
 export default route;

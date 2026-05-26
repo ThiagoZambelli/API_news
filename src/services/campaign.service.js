@@ -2,7 +2,7 @@ import Campaign from "../models/Campaign.js";
 
 const createService = (body) => Campaign.create(body);
 const findAllService = (offset, limit) => Campaign.find().sort({ _id: -1 }).skip(offset).limit(limit).populate("author").populate("sections");
-const findByIdService = (campaignId) => Campaign.findById(campaignId);
+const findByIdService = (campaignId) => Campaign.findById(campaignId).populate("author").populate("sections");
 const updateService = (id,
     title,
     description,

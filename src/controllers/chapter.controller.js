@@ -88,6 +88,22 @@ const findAll = async (req, res) => {
 
 const findById = async (req, res) => {
     try {
+        const { chapterId } = req.params;
+
+        const chapter = await findByIdService(chapterId);
+        if (!chapter) {
+            return res.status(400).send({ message: "This chapter does not exist." })
+        }
+
+        return res.send({
+            Chapter: {
+                id: chapter._id,
+                title: chapter.title,
+                text: chapter.text,
+                author: chapter.author,
+                section: chapter.section,
+            }
+        })
 
     } catch (err) { return res.status(500).send({ message: err.message }) };
 };

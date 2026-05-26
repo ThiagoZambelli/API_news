@@ -6,6 +6,6 @@ const route = Router();
 
 route.post("/", authMiddleware, campaignController.create)
 route.get("/", campaignController.findAll)
-route.get("/:chapterId", campaignController.findById)
+route.get("/:campaignId", campaignController.findById)
 
 export default route;

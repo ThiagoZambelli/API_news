@@ -4,8 +4,9 @@ import { authMiddleware } from "../middlewares/auth.middleware.js";
 
 const route = Router();
 
-route.post("/", authMiddleware, chapterController.create)
-route.get("/", chapterController.findAll)
-route.get("/:chapterId", chapterController.findById)
+route.post("/", authMiddleware, chapterController.create);
+route.get("/", chapterController.findAll);
+route.get("/search", chapterController.searchByTitle);
+route.get("/:chapterId", chapterController.findById);
 
 export default route;

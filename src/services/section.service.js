@@ -10,4 +10,8 @@ const updateService = (id,
         { title, chapters });
 const countSection = () => Section.countDocuments();
 
-export { createService, findAllService, findByIdService, updateService, countSection };
+const searchByTitleService = (title) => Section.find({
+    title: { $regex: `${title || ""}`, $options: "i" }
+}).sort({ _id: -1 }).populate("author").populate("chapters").populate("campaign");;
+
+export { createService, findAllService, findByIdService, updateService, countSection, searchByTitleService };

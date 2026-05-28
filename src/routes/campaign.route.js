@@ -4,8 +4,9 @@ import { authMiddleware } from "../middlewares/auth.middleware.js";
 
 const route = Router();
 
-route.post("/", authMiddleware, campaignController.create)
-route.get("/", campaignController.findAll)
-route.get("/:campaignId", campaignController.findById)
+route.post("/", authMiddleware, campaignController.create);
+route.get("/", campaignController.findAll);
+route.get("/search", campaignController.searchByTitle);
+route.get("/:campaignId", campaignController.findById);
 
 export default route;

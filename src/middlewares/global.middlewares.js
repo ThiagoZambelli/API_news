@@ -31,7 +31,7 @@ export const validUser = async (req, res, next) => {
 
         //retorna o id e o usuario validado pelo next na req
         req.id = id;
-        req.user = user;
+        req.user = user;        
         next();
     } catch (err) {
         res.status(500).send({ message: err.message })

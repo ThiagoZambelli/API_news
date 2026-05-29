@@ -1,4 +1,4 @@
-import { searchByTitleService, countSection, createService, findAllService, findByIdService } from '../services/section.service.js';
+import { searchByTitleService, countSection, createService, findAllService, findByIdService, findByAuthorService } from '../services/section.service.js';
 import Campaign from "../models/Campaign.js";
 
 const create = async (req, res) => {
@@ -130,4 +130,26 @@ const searchByTitle = async (req, res) => {
     } catch (err) { return res.status(500).send({ message: err.message }) };
 };
 
-export default { create, findAll, findById, searchByTitle }; 
+const findByAuthor = async (req, res) => {
+    try {
+        const authorId = req.id;
+
+        if (!authorId) {
+            return res.status(400).send({ message: "You need a valid ID" })
+        }
+
+        const sections = await findByAuthorService(authorId);
+        return res.send({
+            results: sections.map((item) => ({
+                id: item._id,
+                title: item.title,
+                chapters: item.chapters,
+                author: item.author,
+                campaign: item.campaign,
+            }))
+        });
+
+    } catch (err) { return res.status(500).send({ message: err.message }) };
+};
+
+export default { create, findAll, findById, searchByTitle, findByAuthor }; 

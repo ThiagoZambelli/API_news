@@ -7,5 +7,6 @@ const countChapter = () => Chapter.countDocuments();
 const searchByTitleService = (title) => Chapter.find({
     title: { $regex: `${title || ""}`, $options: "i" }
 }).sort({ _id: -1 }).populate("author").populate("section");
+const findByAuthorService = (authorId) => Chapter.find({ author: authorId }).sort({ _id: -1 }).populate("author").populate("section");
 
-export { createService, findAllService, findByIdService, countChapter, searchByTitleService };
+export { createService, findAllService, findByIdService, countChapter, searchByTitleService, findByAuthorService };

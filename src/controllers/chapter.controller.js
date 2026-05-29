@@ -1,4 +1,4 @@
-import { searchByTitleService, countChapter, createService, findAllService, findByIdService } from '../services/chapter.service.js';
+import { searchByTitleService, countChapter, createService, findAllService, findByIdService, findByAuthorService } from '../services/chapter.service.js';
 import Section from "../models/Section.js";
 
 const create = async (req, res) => {
@@ -131,4 +131,26 @@ const searchByTitle = async (req, res) => {
     } catch (err) { return res.status(500).send({ message: err.message }) };
 };
 
-export default { create, findAll, findById, searchByTitle }; 
+const findByAuthor = async (req, res) => {
+    try {
+        const authorId = req.id;
+
+        if (!authorId) {
+            return res.status(400).send({ message: "You need a valid ID" })
+        }
+
+        const chapters = await findByAuthorService(authorId);
+        return res.send({
+            results: chapters.map((item) => ({
+                id: item._id,
+                title: item.title,
+                text: item.text,
+                author: item.author,
+                section: item.section,
+            }))
+        });
+
+    } catch (err) { return res.status(500).send({ message: err.message }) };
+};
+
+export default { create, findAll, findById, searchByTitle, findByAuthor }; 

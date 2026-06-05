@@ -1,4 +1,4 @@
-import { searchByTitleService, countChapter, createService, findAllService, findByIdService, findByAuthorService } from '../services/chapter.service.js';
+import { updateService, searchByTitleService, countChapter, createService, findAllService, findByIdService, findByAuthorService } from '../services/chapter.service.js';
 import Section from "../models/Section.js";
 
 const create = async (req, res) => {
@@ -153,4 +153,26 @@ const findByAuthor = async (req, res) => {
     } catch (err) { return res.status(500).send({ message: err.message }) };
 };
 
-export default { create, findAll, findById, searchByTitle, findByAuthor }; 
+const update = async (req, res) => {
+    try {
+        const { title, text } = req.body;
+        const { id } = req.params;
+
+        const chapter = await findByIdService(id);       
+
+        if (chapter.author._id != req.userId) {
+            return res.status(400).send({ message: "This is not the author." });
+        };
+
+        if (!title && !text) {
+            return res.status(400).send({ message: "No data to update" });
+        };
+
+        await updateService(id, title, text);
+
+        return res.send({ message: "updated successfully" });
+
+    } catch (err) { return res.status(500).send({ message: err.message }) };
+};
+
+export default { update, create, findAll, findById, searchByTitle, findByAuthor }; 

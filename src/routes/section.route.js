@@ -11,5 +11,6 @@ route.get("/search", sectionController.searchByTitle);
 route.get("/byAuthor/:id", validId, validUser, sectionController.findByAuthor);
 
 route.get("/:sectionId", sectionController.findById);
+route.patch("/:id", authMiddleware, sectionController.update);
 
 export default route;

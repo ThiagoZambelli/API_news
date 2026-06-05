@@ -8,5 +8,6 @@ const searchByTitleService = (title) => Chapter.find({
     title: { $regex: `${title || ""}`, $options: "i" }
 }).sort({ _id: -1 }).populate("author").populate("section");
 const findByAuthorService = (authorId) => Chapter.find({ author: authorId }).sort({ _id: -1 }).populate("author").populate("section");
+const updateService = (id, title, text) => Chapter.findOneAndUpdate({ _id: id }, { title, text }, { rawResult: true })
 
-export { createService, findAllService, findByIdService, countChapter, searchByTitleService, findByAuthorService };
+export { updateService, createService, findAllService, findByIdService, countChapter, searchByTitleService, findByAuthorService };

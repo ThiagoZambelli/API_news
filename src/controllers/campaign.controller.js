@@ -1,4 +1,4 @@
-import { searchByTitleService, countCampaign, createService, findAllService, findByIdService, findByAuthorService } from '../services/campaign.service.js';
+import { updateService, searchByTitleService, countCampaign, createService, findAllService, findByIdService, findByAuthorService } from '../services/campaign.service.js';
 
 const create = async (req, res) => {
     try {
@@ -140,4 +140,26 @@ const findByAuthor = async (req, res) => {
     } catch (err) { return res.status(500).send({ message: err.message }) };
 };
 
-export default { create, findAll, findById, searchByTitle, findByAuthor }; 
+const update = async (req, res) => {
+    try {
+        const { title, description } = req.body;
+        const { id } = req.params;
+
+        const campaign = await findByIdService(id);
+
+        if (campaign.author._id != req.userId) {
+            return res.status(400).send({ message: "This is not the author." });
+        };
+
+        if (!title && !description) {
+            return res.status(400).send({ message: "No data to update" });
+        };
+
+        await updateService(id, title, description);
+
+        return res.send({ message: "updated successfully" });
+
+    } catch (err) { return res.status(500).send({ message: err.message }) };
+};
+
+export default { create, findAll, findById, searchByTitle, findByAuthor, update }; 

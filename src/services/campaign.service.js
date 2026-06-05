@@ -9,12 +9,12 @@ const updateService = (
     description,
     sections) => Campaign.findOneAndUpdate(
         { _id: id },
-        { title, description, sections });
+        { title, description, sections },
+        { rawResult: true });
 const countCampaign = () => Campaign.countDocuments();
 const searchByTitleService = (title) => Campaign.find({
     title: { $regex: `${title || ""}`, $options: "i" }
 }).sort({ _id: -1 }).populate("author").populate("sections");
 const findByAuthorService = (authorId) => Campaign.find({ author: authorId }).sort({ _id: -1 }).populate("author").populate("sections");
-
 
 export { createService, findAllService, findByIdService, updateService, countCampaign, searchByTitleService, findByAuthorService };

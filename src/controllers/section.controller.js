@@ -1,4 +1,4 @@
-import { searchByTitleService, countSection, createService, findAllService, findByIdService, findByAuthorService } from '../services/section.service.js';
+import { updateService, searchByTitleService, countSection, createService, findAllService, findByIdService, findByAuthorService } from '../services/section.service.js';
 import Campaign from "../models/Campaign.js";
 
 const create = async (req, res) => {
@@ -152,4 +152,26 @@ const findByAuthor = async (req, res) => {
     } catch (err) { return res.status(500).send({ message: err.message }) };
 };
 
-export default { create, findAll, findById, searchByTitle, findByAuthor }; 
+const update = async (req, res) => {
+    try {
+        const { title } = req.body;
+        const { id } = req.params;
+
+        const section = await findByIdService(id);
+
+        if (section.author._id != req.userId) {
+            return res.status(400).send({ message: "This is not the author." });
+        };
+
+        if (!title && !description) {
+            return res.status(400).send({ message: "No data to update" });
+        };
+
+        await updateService(id, title);
+
+        return res.send({ message: "updated successfully" });
+
+    } catch (err) { return res.status(500).send({ message: err.message }) };
+};
+
+export default { create, findAll, findById, searchByTitle, findByAuthor, update }; 

@@ -7,7 +7,8 @@ const updateService = (id,
     title,
     chapters) => Section.findOneAndUpdate(
         { _id: id },
-        { title, chapters });
+        { title, chapters },
+        { rawResult: true });
 const countSection = () => Section.countDocuments();
 
 const searchByTitleService = (title) => Section.find({

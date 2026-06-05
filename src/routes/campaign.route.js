@@ -11,5 +11,6 @@ route.get("/search", campaignController.searchByTitle);
 route.get("/byAuthor/:id", validId, validUser, campaignController.findByAuthor);
 
 route.get("/:campaignId", campaignController.findById);
+route.patch("/:id", authMiddleware, campaignController.update);
 
 export default route;
